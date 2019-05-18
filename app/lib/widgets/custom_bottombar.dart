@@ -24,8 +24,11 @@ class CustomBottomBar extends StatelessWidget {
           children: <Widget>[
             ClipPath(
               clipper: clipper,
-              child: Container(color: Colors.white,),
-            ),ClipPath(
+              child: Container(
+                color: Colors.white,
+              ),
+            ),
+            ClipPath(
               clipper: clipper,
               child: Row(
                 children: <Widget>[
@@ -77,7 +80,8 @@ class CustomBottomBar extends StatelessWidget {
       flex: percentage.round(),
       child: Container(
         height: 46.0,
-        color: blue ? Colors.blue.withOpacity(0.5) : Colors.red.withOpacity(0.5),
+//        color: blue ? Colors.blue.withOpacity(0.5) : Colors.red.withOpacity(0.5),
+        color: Colors.white
       ),
     );
   }

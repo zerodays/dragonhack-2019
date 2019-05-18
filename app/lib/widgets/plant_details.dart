@@ -68,6 +68,28 @@ class PlantDetails extends StatelessWidget {
                         style: TextStyle(fontSize: 13.0),
                       ),
                     ],
+                  ),
+                  
+                  Expanded(child: Container(),),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.map, color: Theme.of(context).accentColor,),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.favorite, color: Theme.of(context).accentColor),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.share, color: Theme.of(context).accentColor),
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

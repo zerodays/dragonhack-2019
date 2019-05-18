@@ -117,7 +117,7 @@ def scan_view(request):
 
 
 def history_view(request):
-    plants_query = ScannedPlant.objects.filter(recognized=True, probability__gte=0.1).order_by('date_created')
+    plants_query = ScannedPlant.objects.filter(recognized=True, probability__gte=0.1).order_by('-date_created')
     plants = list(map(plant_to_dictionary, plants_query))
 
     res = {

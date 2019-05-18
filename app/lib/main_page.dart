@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'widgets/appbar.dart';
 import 'camera_view.dart';
 import 'widgets/map.dart';
+import 'widgets/custom_notched_rectangle.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -23,36 +24,48 @@ class _MyHomePageState extends State<MyHomePage> {
             height: MediaQuery.of(context).size.height,
             child: MapWidget(),
           ),
-          Scaffold(
-            appBar: CustomAppBar(),
-            backgroundColor: Colors.transparent,
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.local_florist),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) => CameraView()));
-              },
-              shape: CircleBorder(),
-              clipBehavior: Clip.antiAlias,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SafeArea(
+                child: BottomAppBar(
+                  shape: CustomCircularNotchedRectangle(context),
+                  notchMargin: 6.0,
+                  child: Container(
+                    height: 48.0,
+                    child: Row(
+                      children: <Widget>[
+                        _getPercentageDisplay(10.2, true),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        _getPercentageDisplay(89.8, false)
+                      ],
+                    ),
+                  ),
+                )
             ),
-            bottomNavigationBar: BottomAppBar(
-              shape: CircularNotchedRectangle(),
-              notchMargin: 6.0,
-              child: Container(
-                height: 48.0,
-                child: Row(
-                  children: <Widget>[
-                    _getPercentageDisplay(10.2, true),
-                    Expanded(child: Container(),),
-                    _getPercentageDisplay(89.8, false)
-                  ],
-                ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: FloatingActionButton(
+                child: const Icon(Icons.local_florist),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => CameraView()));
+                },
+                shape: CircleBorder(),
+                clipBehavior: Clip.antiAlias,
               ),
             ),
-            body: null,
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: CustomAppBar(),
           )
         ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 
@@ -62,7 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
         height: 46.0,
         color: Colors.transparent,
         child: Center(
-          child: Text('$percentage %', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),),
+          child: Text(
+            '$percentage %',
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
+          ),
         ),
       ),
     );

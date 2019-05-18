@@ -1,4 +1,5 @@
 import base64
+import time
 import uuid
 from io import BytesIO
 
@@ -6,8 +7,12 @@ from PIL import Image
 from django.conf import settings
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import HttpResponse
+from django.utils import timezone
 
 from base.models import ScannedPlant
+
+import requests
+import json
 
 
 def scan_view(request):
@@ -39,7 +44,43 @@ def scan_view(request):
 
     body = {
         'key': settings.PLANT_ID_API_KEY,
-        '': '',
+        'custom_id': scanned.pk,
+        'latitude': latitude,
+        'longitude': longitude,
+        'date': int(timezone.now().timestamp() * 1000),
+        'images': [
+            image_b64,
+        ],
     }
 
-    return HttpResponse('mami', content_type='application/json')
+    r = requests.post(url='https://api.plant.id/identify', data=json.dumps(body),
+                      headers={'Content-Type': 'application/json'})
+
+    if r.status_code != 200:
+        # TODO: Handle error
+        pass
+
+    scanned_id = r.json()['id']
+
+    suggestions = check_identification(scanned_id, sleep=1)
+    while len(suggestions) == 0:
+        suggestions = check_identification(scanned_id, sleep=0.5)
+
+    return HttpResponse(suggestions, content_type='application/json')
+
+
+def check_identification(scanned_id, sleep=None):
+    if sleep is not None:
+        time.sleep(sleep)
+
+    body = {
+        'key': settings.PLANT_ID_API_KEY,
+        'ids': [
+            scanned_id,
+        ],
+    }
+
+    r = requests.post(url='https://api.plant.id/check_identifications', data=json.dumps(body),
+                      headers={'Content-Type': 'application/json'})
+
+    return r.json()[0].get('suggestions', [])

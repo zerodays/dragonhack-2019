@@ -1,7 +1,6 @@
-from django.core.management import BaseCommand
-
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
+from django.core.management import BaseCommand
 
 from base.models import SpecialPlant
 

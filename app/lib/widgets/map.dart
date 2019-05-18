@@ -47,14 +47,15 @@ class MapWidget extends StatelessWidget {
         TileLayerOptions(
           wms: true,
           urlTemplate:
-          "http://ows.terrestris.de/osm/service?SERVICE={SERVICE}&VERSION={VERSION}&REQUEST={REQUEST}&layers={layers}&styles={styles}&srs={srs}&width={width}&height={height}&format={format}&bbox={bbox}",
+          "https://services.sentinel-hub.com/ogc/wms/70b59b94-ad29-46a9-a0d3-716340829939?SERVICE={SERVICE}&VERSION={VERSION}&REQUEST={REQUEST}&layers={layers}&styles={styles}&srs={srs}&width={width}&height={height}&format={format}&bbox={bbox}&time={time}",
           additionalOptions: {
             'SERVICE': 'WMS',
             'VERSION': '1.1.1',
             'REQUEST': 'GetMap',
-            'layers': 'TOPO-WMS',
+            'layers': 'FALSE_COLOR',
             'styles': '',
             'srs': 'EPSG:4326',
+            'time': '2016-11-01/2017-05-18',
             'width': '256',
             'height': '256',
             'format': 'image/png'

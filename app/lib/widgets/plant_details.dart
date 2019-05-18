@@ -98,14 +98,17 @@ class PlantDetails extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Container(
-              height: MediaQuery.of(context).size.width / 1.5,
-              width: MediaQuery.of(context).size.width / 1.5,
-              decoration: new BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: new DecorationImage(
-                      fit: BoxFit.fill,
-                      image: CachedNetworkImageProvider(plant['image_url'])))),
+          child: Hero(
+            tag: plant['id'].toString(),
+            child: Container(
+                height: MediaQuery.of(context).size.width / 1.5,
+                width: MediaQuery.of(context).size.width / 1.5,
+                decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: new DecorationImage(
+                        fit: BoxFit.fill,
+                        image: CachedNetworkImageProvider(plant['image_url'])))),
+          ),
         )
       ],
     ));

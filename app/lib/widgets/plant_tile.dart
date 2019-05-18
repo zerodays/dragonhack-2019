@@ -121,14 +121,17 @@ class PlantTile extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: EdgeInsets.only(left: 8.0),
-                          child: Container(
-                              height: MediaQuery.of(context).size.width / 3,
-                              width: MediaQuery.of(context).size.width / 3,
-                              decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: new DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: CachedNetworkImageProvider(plant['image_url'])))),
+                          child: Hero(
+                            tag: plant['id'].toString(),
+                            child: Container(
+                                height: MediaQuery.of(context).size.width / 3,
+                                width: MediaQuery.of(context).size.width / 3,
+                                decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: CachedNetworkImageProvider(plant['image_url'])))),
+                          ),
                         ),
                       ),
                     ],

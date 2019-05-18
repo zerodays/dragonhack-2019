@@ -37,9 +37,14 @@ def plant_to_dictionary(plant):
     invasive = SpecialPlant.objects.filter(name=plant.name, type=SpecialPlant.INVAZIVNE).exists()
     protected = SpecialPlant.objects.filter(name=plant.name, type=SpecialPlant.ZASCITENE).exists()
 
+    if plant.description is None or plant.description == '':
+        plant.description = get_flower_description(plant.name)
+        plant.save()
+
     return {
+        'id': plant.pk,
         'name': plant.name.title(),
-        'description': get_flower_description(plant.name),
+        'description': plant.description,
         'image_url': plant.image.url,
         'latitude': plant.latitude,
         'longitude': plant.longitude,

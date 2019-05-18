@@ -3,6 +3,8 @@ import 'package:camera/camera.dart';
 import 'camera_view.dart';
 import 'main_page.dart';
 import 'package:flutter/services.dart';
+import 'util/colors.dart';
+
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
@@ -24,7 +26,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primaryColor: AppColors.primary,
+        accentColor: AppColors.primary,
+        brightness: Brightness.dark,
+        backgroundColor: AppColors.bcgColor,
+        bottomAppBarColor: AppColors.bcgColor,
+        appBarTheme: AppBarTheme(color: AppColors.bcgColor),
+        scaffoldBackgroundColor: AppColors.bcgColor,
+        canvasColor: AppColors.bcgColor
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );

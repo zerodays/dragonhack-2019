@@ -4,6 +4,7 @@ import 'widgets/appbar.dart';
 import 'camera_view.dart';
 import 'widgets/map.dart';
 import 'widgets/custom_bottombar.dart';
+import 'util/colors.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -34,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Padding(
               padding: EdgeInsets.only(bottom: appBarHeight/2),
               child: FloatingActionButton(
-                child: const Icon(Icons.local_florist),
+                child: const Icon(Icons.local_florist, color: Colors.white),
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => CameraView()));

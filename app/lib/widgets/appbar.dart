@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:dragonhack_2019/history_page.dart';
+import '../util/colors.dart';
 
 import '../globals.dart';
 
@@ -37,13 +38,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                         child: Container(
                           alignment: Alignment.center,
-                          color: Colors.white54,
+                          color: AppColors.bcgColor.withOpacity(0.5),
                           child: Text(
                             'RED TEAM',
                             style: TextStyle(
-                                fontWeight: FontWeight.w300,
+                                fontWeight: FontWeight.w400,
                                 fontSize: 22.0,
-                                color: Colors.black),
+                                color: Colors.white),
                           ),
                         ),
                       ),
@@ -60,7 +61,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Container(
                         height: 56.0,
                         width: 56.0,
-                        color: Colors.white,
+                        color: AppColors.primary,
                         child: IconButton(
                             icon: Icon(Icons.history),
                             onPressed: () {
@@ -81,7 +82,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Container(
                         height: 56.0,
                         width: 56.0,
-                        color: Colors.white,
+                        color: AppColors.primary,
                         child: IconButton(
                             icon: Icon(Icons.layers),
                             onPressed: () {

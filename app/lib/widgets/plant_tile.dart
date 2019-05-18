@@ -77,7 +77,7 @@ class PlantTile extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6.0),
                       child: Card(
-                        elevation: 3,
+                        elevation: 7,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
                         child: Container(

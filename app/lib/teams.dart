@@ -2,13 +2,14 @@ enum Team {
   red, blue
 }
 
-String teamToString(Team team) {
+int teamToInt(Team team) {
   switch (team) {
     case Team.blue:
-      return 'blue';
+      return 0;
     case Team.red:
-      return 'red';
+      return 1;
   }
+  return 0;
 }
 
 Team currentTeam = Team.blue;

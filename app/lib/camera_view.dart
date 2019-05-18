@@ -4,6 +4,7 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
 import 'api.dart';
+import 'scanned_plant_view.dart';
 
 List<CameraDescription> allCameras;
 
@@ -42,33 +43,48 @@ class CameraViewState extends State<CameraView> {
         child: CircularProgressIndicator(),
       );
     }
-    return Stack(
-        alignment: Alignment.center,
-        children: [
+    return Stack(alignment: Alignment.center, children: [
       AspectRatio(
         aspectRatio: controller.value.aspectRatio,
         child: CameraPreview(controller),
       ),
       Padding(
           padding: EdgeInsets.all(32.0),
-          child:
-      FloatingActionButton(
-        child: Icon(Icons.panorama_fish_eye),
-        onPressed: takePicture,
-      ))
+          child: FloatingActionButton(
+            child: Icon(Icons.panorama_fish_eye),
+            onPressed: takePicture,
+          ))
     ]);
   }
 
-
   Future<void> takePicture() async {
     String filename = join(
-        (await getTemporaryDirectory()).path,
-    '${DateTime.now()}.jpg',
+      (await getTemporaryDirectory()).path,
+      '${DateTime.now()}.jpg',
     );
 
     await controller.takePicture(filename);
 
-    // TODO; neki dobis nazaj tuki
-    sendImage(filename);
+    Map<String, dynamic> plant = await sendImage(filename);
+
+    if (plant == null) {
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) => AlertDialog(
+                title: Text('Plant not recognized'),
+                content: Text(
+                    'Sorry, but we were not able to recognize any plants.'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              ));
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (BuildContext context) => ScannedPlantView(plant)));
+    }
   }
 }

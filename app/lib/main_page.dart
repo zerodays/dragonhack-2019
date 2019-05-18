@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'widgets/appbar.dart';
+import 'camera_view.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -30,7 +31,9 @@ class _MyHomePageState extends State<MyHomePage> {
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.local_florist),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => CameraView()));
+              },
               shape: CircleBorder(),
               clipBehavior: Clip.antiAlias,
             ),

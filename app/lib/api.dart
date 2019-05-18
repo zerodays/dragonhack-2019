@@ -65,7 +65,7 @@ Future<Map<String, dynamic>> sendImage(String imageName) async {
   String imageBase64 = base64.encode(await File(imageName).readAsBytes());
 
   Map<String, dynamic> params = {
-    'team': teamToString(currentTeam),
+    'team': teamToInt(currentTeam),
     'image': imageBase64,
     'lat': location.latitude,
     'lon': location.longitude
@@ -73,5 +73,13 @@ Future<Map<String, dynamic>> sendImage(String imageName) async {
 
   Map<String, dynamic> data = await postRequest('scan', params);
 
-  return data;
+  if (data['success']) {
+    print('Plant not recognized');
+    return null;
+  }
+
+  print('Plant recognized');
+  print('Probability: ${data["probability"]}');
+
+  return data['plant'];
 }

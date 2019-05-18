@@ -24,7 +24,7 @@ class CustomCircularNotchedRectangle extends NotchedShape {
   @override
   Path getOuterPath(Rect host, Rect guest) {
     guest = Rect.fromCircle(
-      center: Offset(MediaQuery.of(context).size.width / 2.0, 4.0),
+      center: Offset(MediaQuery.of(context).size.width / 2.0, 1.0),
       radius: 64.0 / 2.0
     );
 

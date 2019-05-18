@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'globals.dart';
 import 'widgets/appbar.dart';
 import 'camera_view.dart';
 import 'widgets/map.dart';
@@ -32,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 16.0),
+              padding: EdgeInsets.only(bottom: appBarHeight/2),
               child: FloatingActionButton(
                 child: const Icon(Icons.local_florist),
                 onPressed: () {

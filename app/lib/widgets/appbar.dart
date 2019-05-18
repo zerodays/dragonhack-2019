@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:dragonhack_2019/history_page.dart';
+
+import '../globals.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -8,63 +12,88 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   CustomAppBar({
     Key key,
-    this.height = 64.0,
+    this.height = appBarHeight,
   }) : preferredSize = Size.fromHeight(height);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        height: height,
-        padding: EdgeInsets.only(top: 8.0),
-        width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Container(
-          color: Colors.transparent,
-          child: Row(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(32.0),
-                    bottomRight: Radius.circular(32.0)
-                ),
-                child: Container(
-                  height: 56.0,
-                  width: 56.0,
-                  color: Colors.white,
-                  child: IconButton(icon: Icon(Icons.satellite), onPressed: () => {}),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 18.0),
-                      child: Text(
-                        'RED TEAM',
-                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22.0, color: Colors.red),
+            height: height,
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(32.0),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    left: 0.0,
+                    right: 0.0,
+                    top: 0.0,
+                    bottom: 0.0,
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                          color: Colors.white54,
+                          child: Text(
+                            'RED TEAM',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                fontSize: 22.0,
+                                color: Colors.black),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  Positioned(
+                    left: 0.0,
+                    top: 0.0,
+                    bottom: 0.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(32.0),
+                          bottomRight: Radius.circular(32.0)),
+                      child: Container(
+                        height: 56.0,
+                        width: 56.0,
+                        color: Colors.white,
+                        child: IconButton(
+                            icon: Icon(Icons.history),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => HistoryPage()));
+                            }),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    right: 0.0,
+                    top: 0.0,
+                    bottom: 0.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(32.0),
+                          bottomLeft: Radius.circular(32.0)),
+                      child: Container(
+                        height: 56.0,
+                        width: 56.0,
+                        color: Colors.white,
+                        child: IconButton(
+                            icon: Icon(Icons.layers),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => HistoryPage()));
+                            }),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32.0),
-                    bottomLeft: Radius.circular(32.0)
-                ),
-                child: Container(
-                  height: 56.0,
-                  width: 56.0,
-                  color: Colors.white,
-                  child: IconButton(icon: Icon(Icons.satellite), onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => HistoryPage()));
-                  }),
-                ),
-              ),
-            ],
-          ),
-        )
+            )),
       ),
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../globals.dart';
 import 'custom_notched_rectangle.dart';
 import 'package:flutter/foundation.dart';
 
 class CustomBottomBar extends StatelessWidget {
   ValueListenable<ScaffoldGeometry> geometryListenable;
-
+  static const height = appBarHeight;
   CustomBottomBar();
 
   @override
@@ -19,7 +20,7 @@ class CustomBottomBar extends StatelessWidget {
 
     return SafeArea(
       child: Container(
-        height: 46.0,
+        height: height,
         child: Stack(
           children: <Widget>[
             ClipPath(
@@ -43,7 +44,7 @@ class CustomBottomBar extends StatelessWidget {
               shape: CustomCircularNotchedRectangle(context),
               notchMargin: 6.0,
               child: Container(
-                height: 46.0,
+                height: height,
                 child: Row(
                   children: <Widget>[
                     _getPercentageDisplay(64.2, true),
@@ -64,7 +65,7 @@ class CustomBottomBar extends StatelessWidget {
   _getPercentageDisplay(double percentage, bool blue) {
     return Expanded(
       child: Container(
-        height: 46.0,
+        height: height,
         child: Center(
           child: Text(
             '$percentage %',
@@ -79,7 +80,7 @@ class CustomBottomBar extends StatelessWidget {
     return Expanded(
       flex: percentage.round(),
       child: Container(
-        height: 46.0,
+        height: height,
 //        color: blue ? Colors.blue.withOpacity(0.5) : Colors.red.withOpacity(0.5),
         color: Colors.white
       ),

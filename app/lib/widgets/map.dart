@@ -4,6 +4,9 @@ import 'package:latlong/latlong.dart';
 
 class MapWidget extends StatelessWidget {
   static const String route = '/';
+  static const List<String> layers = [
+
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +78,6 @@ class MapWidget extends StatelessWidget {
             ),
           ],
         ),
-        PolygonLayerOptions(
-          polygons: _getPolygons(),
-        )
       ],
     );
   }

@@ -66,68 +66,71 @@ class PlantTile extends StatelessWidget {
       );
     }
 
-    return Material(
-        child: InkWell(
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => PlantDetails(plant))),
-            child: AspectRatio(
-                aspectRatio: 2 / 1,
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6.0),
-                      child: Card(
-                        elevation: 7,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 6.0 + 8.0, top: 16.0, bottom: 16.0, right: 8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Flexible(
-                                      child: Text(
-                                        plant['name'],
-                                        overflow: TextOverflow.clip,
-                                        style: TextStyle(
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.w600),
-                                        softWrap: true,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Material(
+          child: InkWell(
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => PlantDetails(plant))),
+              child: AspectRatio(
+                  aspectRatio: 2 / 1,
+                  child: Stack(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6.0),
+                        child: Card(
+                          elevation: 7,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 6.0 + 16.0, top: 16.0, bottom: 16.0, right: 8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Flexible(
+                                        child: Text(
+                                          plant['name'],
+                                          overflow: TextOverflow.clip,
+                                          style: TextStyle(
+                                              fontSize: 24.0,
+                                              fontWeight: FontWeight.w600),
+                                          softWrap: true,
+                                        ),
                                       ),
-                                    ),
-                                    Container(height: 12.0,),
-                                    Text(plant['description'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis,),
-                                    Flexible(child: Container()),
-                                    invasiveAndProtected
-                                  ],
-                                ),
-                              )
-                            ],
+                                      Container(height: 12.0,),
+                                      Text(plant['description'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis,),
+                                      Flexible(child: Container()),
+                                      invasiveAndProtected
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Container(
-                            height: MediaQuery.of(context).size.width / 3,
-                            width: MediaQuery.of(context).size.width / 3,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: CachedNetworkImageProvider(plant['image_url'])))),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Container(
+                              height: MediaQuery.of(context).size.width / 3,
+                              width: MediaQuery.of(context).size.width / 3,
+                              decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: CachedNetworkImageProvider(plant['image_url'])))),
+                        ),
                       ),
-                    ),
-                  ],
-                ))));
+                    ],
+                  )))),
+    );
   }
 }

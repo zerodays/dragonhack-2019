@@ -31,15 +31,12 @@ class HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('History'),
-      ),
       body: plants == null
           ? Center(
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 46.0),
               itemBuilder: plantsBuilder,
               itemCount: plants.length,
             ),

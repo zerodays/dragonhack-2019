@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../util/custom_notched_rectangle.dart';
+import '../util/colors.dart';
 
 class CustomBottomBar extends StatelessWidget {
   static const height = appBarHeight;
@@ -42,22 +43,18 @@ class CustomBottomBar extends StatelessWidget {
       child: Container(
         height: height,
         child: Center(
-          child: Text(
-            '$percentage %',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(blue ? 'BLUE' : 'RED', style: TextStyle(color: AppColors.primary[700], fontSize: 14.0, fontWeight: FontWeight.w700),),
+              Container(height: 4.0,),
+              Text(
+                '$percentage %',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
+              )
+            ],
           ),
         ),
-      ),
-    );
-  }
-
-  _getPercentageRect(double percentage, bool blue) {
-    return Expanded(
-      flex: percentage.round(),
-      child: Container(
-        height: height,
-//        color: blue ? Colors.blue.withOpacity(0.5) : Colors.red.withOpacity(0.5),
-        color: Colors.white
       ),
     );
   }

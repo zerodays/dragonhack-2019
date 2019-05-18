@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'widgets/notch.dart';
+import 'package:camera/camera.dart';
+import 'camera_view.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  allCameras = await availableCameras();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -58,18 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '0',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+        child: FlatButton(onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (_) => CameraView()));
+        }, child: Text('Open Camera'))
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }

@@ -15,7 +15,7 @@ class Command(BaseCommand):
         saved = 0
         ignored = 0
         for vrsta in soup.find_all('span', 'gdlr-core-portfolio-info'):
-            name = vrsta.contents[0].contents[0].lower()
+            name = vrsta.contents[0].contents[0].lower().strip()
 
             if not SpecialPlant.objects.filter(name=name, type=SpecialPlant.INVAZIVNE).exists():
                 SpecialPlant(name=name, type=SpecialPlant.INVAZIVNE).save()
@@ -26,4 +26,4 @@ class Command(BaseCommand):
                 print("'{}' exists. Skipping...".format(name))
                 ignored += 1
 
-        print("Saved {} invasive species, already had {} species".format(saved, ignored))
+        print("Saved {} invasive species, already have {} species".format(saved, ignored))

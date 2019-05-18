@@ -4,7 +4,6 @@ import 'widgets/appbar.dart';
 import 'camera_view.dart';
 import 'widgets/map.dart';
 import 'widgets/custom_bottombar.dart';
-import 'widgets/custom_notched_rectangle.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);

@@ -8,6 +8,7 @@ import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 
 import 'teams.dart';
+import 'globals.dart';
 
 const apiUrl = 'http://134.209.251.146/api/';
 

@@ -1,6 +1,5 @@
 import base64
 import json
-import time
 import uuid
 from io import BytesIO
 
@@ -8,28 +7,12 @@ import requests
 from PIL import Image
 from django.conf import settings
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseBadRequest
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
-from api.helpers import get_flower_description
-from base.models import ScannedPlant, SpecialPlant
-
-
-def plant_to_dictionary(plant):
-    invasive = SpecialPlant.objects.filter(name=plant.name, type=SpecialPlant.INVAZIVNE).exists()
-    protected = SpecialPlant.objects.filter(name=plant.name, type=SpecialPlant.ZASCITENE).exists()
-
-    return {
-        'name': plant.name.title(),
-        'description': get_flower_description(plant.name),
-        'image_url': plant.image.url,
-        'latitude': plant.latitude,
-        'longitude': plant.longitude,
-        'date_scanned': plant.date_created.strftime('%d. %b %Y %H:%M'),
-        'invasive': invasive,
-        'protected': protected,
-    }
+from api.helpers import plant_to_dictionary, dictionary_to_response, check_identification
+from base.models import ScannedPlant
 
 
 @csrf_exempt
@@ -93,7 +76,7 @@ def scan_view(request):
             'probability': None,
         }
 
-        return HttpResponse(json.dumps(res), content_type='application/json')
+        return dictionary_to_response(res)
 
     scanned_id = r.json()['id']
 
@@ -130,32 +113,29 @@ def scan_view(request):
             'probability': scanned.probability,
         }
 
-    return HttpResponse(json.dumps(res), content_type='application/json')
+    return dictionary_to_response(res)
 
 
 def history_view(request):
-    plants_query = ScannedPlant.objects.filter(recognized=True, probability__gte=0.1).order_by('-date_created')
+    plants_query = ScannedPlant.get_recognized().order_by('-date_created')
     plants = list(map(plant_to_dictionary, plants_query))
 
     res = {
         'plants': plants,
     }
 
-    return HttpResponse(json.dumps(res), content_type='application/json')
+    return dictionary_to_response(res)
 
 
-def check_identification(scanned_id, sleep=None):
-    if sleep is not None:
-        time.sleep(sleep)
+def percentage_view(request):
+    plants = ScannedPlant.get_recognized()
+    total_number = plants.count()
 
-    body = {
-        'key': settings.PLANT_ID_API_KEY,
-        'ids': [
-            scanned_id,
-        ],
-    }
+    team_0_num = plants.filter(team=0).count()
+    team_0_perc = round(total_number / team_0_num * 100)
+    team_1_perc = 100 - team_0_perc
 
-    r = requests.post(url='https://api.plant.id/check_identifications', data=json.dumps(body),
-                      headers={'Content-Type': 'application/json'})
-
-    return r.json()[0].get('suggestions', [])
+    return dictionary_to_response({
+        '0': team_0_perc,
+        '1': team_1_perc,
+    })

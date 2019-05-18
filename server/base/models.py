@@ -15,6 +15,10 @@ class ScannedPlant(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
 
+    @staticmethod
+    def get_recognized():
+        return ScannedPlant.objects.filter(recognized=True, probability__gte=0.1)
+
 
 class SpecialPlant(models.Model):
     INVAZIVNE = 'IN'

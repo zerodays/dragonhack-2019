@@ -61,7 +61,7 @@ class PlantTile extends StatelessWidget {
                                           Expanded(child: Container(),),
                                           Icon(
                                             plant['protected'] ? Icons.check : Icons.clear,
-                                            color: plant['invasive'] ? Colors.red : Colors.grey,
+                                            color: plant['invasive'] ? Colors.green : Colors.grey,
                                             size: 18.0,
                                           ),
                                           Container(width: 4.0,),

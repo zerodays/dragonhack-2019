@@ -73,7 +73,9 @@ Future<Map<String, dynamic>> sendImage(String imageName) async {
 
   Map<String, dynamic> data = await postRequest('scan', params);
 
-  if (data['success']) {
+  print(data);
+
+  if (!data['success'] || data['probability'] < 0.1) {
     print('Plant not recognized');
     return null;
   }

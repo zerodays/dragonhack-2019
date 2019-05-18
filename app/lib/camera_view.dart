@@ -52,39 +52,20 @@ class CameraViewState extends State<CameraView> {
           padding: EdgeInsets.all(32.0),
           child: FloatingActionButton(
             child: Icon(Icons.panorama_fish_eye),
-            onPressed: takePicture,
+            onPressed: () async {
+              String filename = join(
+                (await getTemporaryDirectory()).path,
+                '${DateTime.now()}.jpg',
+              );
+
+              await controller.takePicture(filename);
+
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => ScannedPlantView(() async {
+                        return sendImage(filename);
+                      }, filename)));
+            },
           ))
     ]);
-  }
-
-  Future<void> takePicture() async {
-    String filename = join(
-      (await getTemporaryDirectory()).path,
-      '${DateTime.now()}.jpg',
-    );
-
-    await controller.takePicture(filename);
-
-    Map<String, dynamic> plant = await sendImage(filename);
-
-    if (plant == null) {
-      showDialog(
-          context: context,
-          barrierDismissible: true,
-          builder: (BuildContext context) => AlertDialog(
-                title: Text('Plant not recognized'),
-                content: Text(
-                    'Sorry, but we were not able to recognize any plants.'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('OK'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  )
-                ],
-              ));
-    } else {
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => ScannedPlantView(plant)));
-    }
   }
 }

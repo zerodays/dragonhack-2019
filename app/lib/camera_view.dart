@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'api.dart';
 import 'scanned_plant_view.dart';
+import 'history_page.dart';
 
 List<CameraDescription> allCameras;
 
@@ -43,29 +44,50 @@ class CameraViewState extends State<CameraView> {
         child: CircularProgressIndicator(),
       );
     }
-    return Stack(alignment: Alignment.center, children: [
-      AspectRatio(
-        aspectRatio: controller.value.aspectRatio,
-        child: CameraPreview(controller),
-      ),
-      Padding(
-          padding: EdgeInsets.all(32.0),
-          child: FloatingActionButton(
-            child: Icon(Icons.panorama_fish_eye),
-            onPressed: () async {
-              String filename = join(
-                (await getTemporaryDirectory()).path,
-                '${DateTime.now()}.jpg',
-              );
+    return Scaffold(
+      body: Column(children: [
+        Container(height: 24.0,),
+        AspectRatio(
+          aspectRatio: controller.value.aspectRatio,
+          child: CameraPreview(controller),
+        ),
+        Expanded(
+          child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => HistoryPage()));
+                    },
+                    icon: Icon(Icons.history, color: Theme.of(context).accentColor,),
+                  ),
+                  FloatingActionButton(
+                    child: Icon(Icons.panorama_fish_eye, color: Theme.of(context).backgroundColor,),
+                    onPressed: () async {
+                      String filename = join(
+                        (await getTemporaryDirectory()).path,
+                        '${DateTime.now()}.jpg',
+                      );
 
-              await controller.takePicture(filename);
+                      await controller.takePicture(filename);
 
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => ScannedPlantView(() async {
-                        return sendImage(filename);
-                      }, filename)));
-            },
-          ))
-    ]);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              ScannedPlantView(() async {
+                                return sendImage(filename);
+                              }, filename)));
+                    },
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.switch_camera, color: Theme.of(context).accentColor),
+                  )
+                ],
+              )),
+        )
+      ]),
+    );
   }
 }

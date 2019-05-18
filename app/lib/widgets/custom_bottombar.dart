@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../globals.dart';
-import 'custom_notched_rectangle.dart';
+import '../util/custom_notched_rectangle.dart';
 import 'package:flutter/foundation.dart';
 
 class CustomBottomBar extends StatelessWidget {

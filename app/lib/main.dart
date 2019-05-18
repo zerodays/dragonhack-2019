@@ -9,6 +9,11 @@ Future<void> main() async {
     statusBarColor: Colors.transparent, //or set color with: Color(0xFF0000FF)
   ));
   allCameras = await availableCameras();
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
   runApp(MyApp());
 }
 

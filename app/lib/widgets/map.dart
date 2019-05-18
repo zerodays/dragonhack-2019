@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'plant_details.dart';
+import '../util/colors.dart';
 
 class MapWidget extends StatefulWidget {
   @override
@@ -28,6 +29,7 @@ class _MapWidgetState extends State<MapWidget> {
       layers: [
         TileLayerOptions(
           wms: true,
+          backgroundColor: AppColors.bcgColor,
           urlTemplate:
               "https://services.sentinel-hub.com/ogc/wms/70b59b94-ad29-46a9-a0d3-716340829939?SERVICE={SERVICE}&VERSION={VERSION}&REQUEST={REQUEST}&layers={layers}&styles={styles}&srs={srs}&width={width}&height={height}&format={format}&bbox={bbox}&time={time}",
           additionalOptions: {

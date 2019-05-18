@@ -4,7 +4,6 @@ import 'camera_view.dart';
 import 'main_page.dart';
 import 'package:flutter/services.dart';
 import 'util/colors.dart';
-import 'package:tinycolor/tinycolor.dart';
 
 
 Future<void> main() async {
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(color: AppColors.bcgColor, brightness: Brightness.dark),
         scaffoldBackgroundColor: AppColors.bcgColor,
         canvasColor: AppColors.bcgColor,
-        cardColor: TinyColor(AppColors.bcgColor).brighten(3).color,
+        cardColor: AppColors.cardColor,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );

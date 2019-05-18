@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../util/colors.dart';
 
 import 'plant_details.dart';
 
@@ -18,19 +19,19 @@ class PlantTile extends StatelessWidget {
           children: <Widget>[
             Icon(
               plant['invasive'] ? Icons.error : Icons.error_outline,
-              color: plant['invasive'] ? Colors.red : Colors.grey,
+              color: plant['invasive'] ? Colors.red : AppColors.primary,
               size: 18.0,
             ),
             Container(width: 4.0,),
-            Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0),),
+            Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0, color: Colors.grey),),
             Expanded(child: Container(),),
             Icon(
               plant['protected'] ? Icons.check : Icons.clear,
-              color: plant['invasive'] ? Colors.green : Colors.grey,
+              color: plant['protected'] ? AppColors.primary : Colors.grey,
               size: 18.0,
             ),
             Container(width: 4.0,),
-            Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0),),
+            Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0, color: Colors.grey),),
             Container(width: 4.0,)
             //protected, invasive
           ],
@@ -44,22 +45,22 @@ class PlantTile extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   plant['invasive'] ? Icons.error : Icons.error_outline,
-                  color: plant['invasive'] ? Colors.red : Colors.grey,
+                  color: plant['invasive'] ? Colors.red : AppColors.darkGreenColor,
                   size: 18.0,
                 ),
                 Container(width: 4.0,),
-                Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0),), //protected, invasive
+                Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0, color: Colors.grey),), //protected, invasive
               ],
             ),
             Row(
               children: <Widget>[
                 Icon(
                   plant['protected'] ? Icons.check : Icons.clear,
-                  color: plant['invasive'] ? Colors.green : Colors.grey,
+                  color: plant['protected'] ? AppColors.primary : Colors.grey,
                   size: 18.0,
                 ),
                 Container(width: 4.0,),
-                Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0),),
+                Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0, color: Colors.grey),),
               ],
             )
           ],
@@ -104,7 +105,8 @@ class PlantTile extends StatelessWidget {
                                         ),
                                       ),
                                       Container(height: 12.0,),
-                                      Text(plant['description'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis,),
+                                      Text(plant['description'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.grey
+                                       ),),
                                       Flexible(child: Container()),
                                       invasiveAndProtected
                                     ],

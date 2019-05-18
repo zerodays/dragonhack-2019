@@ -12,6 +12,7 @@ class ScannedPlant(models.Model):
 
     name = models.CharField(max_length=256, blank=True)
     probability = models.FloatField(null=True, blank=True)
+    description = models.TextField(blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
 

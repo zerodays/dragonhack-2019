@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'camera_view.dart';
 import 'main_page.dart';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+    statusBarColor: Colors.transparent, //or set color with: Color(0xFF0000FF)
+  ));
   allCameras = await availableCameras();
   runApp(MyApp());
 }

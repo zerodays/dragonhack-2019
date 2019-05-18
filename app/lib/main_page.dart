@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widgets/appbar.dart';
 import 'camera_view.dart';
+import 'widgets/map.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -15,18 +16,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(),
       body: Stack(
         children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Image.network(
-              'https://pctechmag.com/wp-content/uploads/2016/06/google-maps-earth-satellite-imagery-2016-3.0.jpg',
-              fit: BoxFit.fitHeight,
-            ),
+            child: MapWidget(),
           ),
           Scaffold(
+            appBar: CustomAppBar(),
             backgroundColor: Colors.transparent,
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             floatingActionButton: FloatingActionButton(
@@ -51,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            body: Center(child: Text('asdf'),),
+            body: null,
           )
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.

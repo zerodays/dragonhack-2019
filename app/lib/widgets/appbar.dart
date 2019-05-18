@@ -61,7 +61,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Container(
                         height: 56.0,
                         width: 56.0,
-                        color: AppColors.primary,
+                        color: Theme.of(context).accentColor,
                         child: IconButton(
                             icon: Icon(Icons.history),
                             onPressed: () {
@@ -82,7 +82,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Container(
                         height: 56.0,
                         width: 56.0,
-                        color: AppColors.primary,
+                        color: Theme.of(context).accentColor,
                         child: IconButton(
                             icon: Icon(Icons.layers),
                             onPressed: () {

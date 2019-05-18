@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Padding(
               padding: EdgeInsets.only(bottom: appBarHeight/2),
               child: FloatingActionButton(
-                child: const Icon(Icons.local_florist, color: Colors.white),
+                child: const Icon(Icons.camera, color: Colors.white),
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => CameraView()));

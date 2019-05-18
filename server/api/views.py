@@ -39,6 +39,9 @@ def scan_view(request):
     bottom = (height + size) / 2
     image = image.crop((left, top, right, bottom))
 
+    if size > 512:
+        image = image.resize((512, 512), Image.ANTIALIAS)
+
     image_file = BytesIO()
     image.save(fp=image_file, format='JPEG')
 

@@ -32,7 +32,7 @@ class Command(BaseCommand):
                 'fritillaria meleagris', 'galanthus nivalis', 'ambrosia artemisiifolia', 'amorpha fruticosa',)
 
             images = ('https://i.ebayimg.com/images/g/MnsAAOSwOA1aPua2/s-l300.jpg',
-                      'https://www.thompson-morgan.com/product_images/100/optimised/PRIM-8628-A_h.jpg',
+                      'https://upload.wikimedia.org/wikipedia/commons/a/ad/Prole%C4%87no_cve%C4%87e_3.JPG',
                       'https://img.crocdn.co.uk/images/products2/pl/20/00/03/11/pl2000031122.jpg?width=940&height=940',
                       'https://cdn.shopify.com/s/files/1/1069/2032/products/Convallaria_majalis_1_1024x1024.jpeg?v=1453888584',
                       'https://www.anniesannuals.com/signs/b%20-%20c/images/bellis_perennis_2015.jpg',
@@ -62,6 +62,9 @@ class Command(BaseCommand):
             right = (width + size) / 2
             bottom = (height + size) / 2
             image = image.crop((left, top, right, bottom))
+
+            if size > 512:
+                image = image.resize((512, 512), Image.ANTIALIAS)
 
             image_file = BytesIO()
             image.save(fp=image_file, format='JPEG')

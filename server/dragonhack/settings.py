@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
 PLANT_ID_API_KEY = 'yylPerd536RE0FxbxEFHdtxyiBemL0erMwFnLuqiuTR10gOKwT'
+RAPID_API_KEY = 'ad34e100ebmsh51dcb536fb994b7p1a9c3ejsn3b3db9544504'
 
 # Application definition
 
@@ -112,7 +113,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

@@ -12,17 +12,23 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
-from base.models import ScannedPlant
+from api.helpers import get_flower_description
+from base.models import ScannedPlant, SpecialPlant
 
 
 def plant_to_dictionary(plant):
+    invasive = SpecialPlant.objects.filter(name=plant.name, type=SpecialPlant.INVAZIVNE).exists()
+    protected = SpecialPlant.objects.filter(name=plant.name, type=SpecialPlant.ZASCITENE).exists()
+
     return {
         'name': plant.name.title(),
-        'description': 'Lorem ipsum',  # TODO: Description
+        'description': get_flower_description(plant.name),
         'image_url': plant.image.url,
         'latitude': plant.latitude,
         'longitude': plant.longitude,
         'date_scanned': plant.date_created.strftime('%d. %b %Y %H:%M'),
+        'invasive': invasive,
+        'protected': protected,
     }
 
 

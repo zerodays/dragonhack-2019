@@ -1,6 +1,7 @@
 **/.idea/
 **/venv3/
 **/venv/
+server/media/
 
 **/.packages
 

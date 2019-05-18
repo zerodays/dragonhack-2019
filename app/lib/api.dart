@@ -1,8 +1,10 @@
-import 'package:dio/dio.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+
 import 'teams.dart';
 
 const apiUrl = 'http://134.209.251.146/api';
@@ -49,9 +51,12 @@ Future postRequest(String name, Map data) async {
 }
 
 
-Future<Map<String, dynamic>> sendImage() async {
+Future<Map<String, dynamic>> sendImage(String imageName) async {
+  String imageBase64 = base64.encode(await File(imageName).readAsBytes());
+
   Map<String, dynamic> params = {
-    'teams': teamToString(currentTeam),
+    'team': teamToString(currentTeam),
+    'image': imageBase64
   };
 
   Map<String, dynamic> data = await getRequest('scan', params);

@@ -26,6 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
+
 PLANT_ID_API_KEY = 'yylPerd536RE0FxbxEFHdtxyiBemL0erMwFnLuqiuTR10gOKwT'
 
 # Application definition

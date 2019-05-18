@@ -4,10 +4,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
+import 'package:flutter/services.dart';
 
 import 'teams.dart';
 
-const apiUrl = 'http://134.209.251.146/api';
+const apiUrl = 'http://134.209.251.146/api/';
 
 final Dio _dio = new Dio(BaseOptions(
     baseUrl: apiUrl,
@@ -52,14 +54,24 @@ Future postRequest(String name, Map data) async {
 
 
 Future<Map<String, dynamic>> sendImage(String imageName) async {
+  LocationData location;
+
+  try {
+    location = await Location().getLocation();
+  } on PlatformException {
+    location = LocationData.fromMap({'latitude': 46.0503344, 'longtitude': 14.4672468});
+  }
+
   String imageBase64 = base64.encode(await File(imageName).readAsBytes());
 
   Map<String, dynamic> params = {
     'team': teamToString(currentTeam),
-    'image': imageBase64
+    'image': imageBase64,
+    'lat': location.latitude,
+    'lon': location.longitude
   };
 
-  Map<String, dynamic> data = await getRequest('scan', params);
+  Map<String, dynamic> data = await postRequest('scan', params);
 
   return data;
 }

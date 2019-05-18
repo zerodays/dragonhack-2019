@@ -61,6 +61,8 @@ def scan_view(request):
                       headers={'Content-Type': 'application/json'})
 
     if r.status_code != 200:
+        print('neki nije bilo vrejdi pa ne prepozna')
+
         res = {
             'success': False,
             'plant': None,
@@ -81,6 +83,8 @@ def scan_view(request):
         suggestions = check_identification(scanned_id, sleep=0.5)
 
     if len(suggestions) == 0:
+        print('timeoutov suggestion (upsi)')
+
         res = {
             'success': False,
             'plant': None,
@@ -88,6 +92,9 @@ def scan_view(request):
         }
     else:
         suggestion = suggestions[0]
+        print('nasu rozo')
+        print(suggestion)
+
         plant_name = suggestion['plant']['name'].lower()
         plant = Plant.objects.filter(name=plant_name).first()
         if plant is None:

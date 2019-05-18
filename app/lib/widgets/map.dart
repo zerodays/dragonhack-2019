@@ -32,7 +32,7 @@ class _MapWidgetState extends State<MapWidget> {
             'SERVICE': 'WMS',
             'VERSION': '1.1.1',
             'REQUEST': 'GetMap',
-            'layers': 'FALSE_COLOR',
+            'layers': 'LILIJA',
             'styles': '',
             'srs': 'EPSG:4326',
             'time': '2016-11-01/2017-05-18',

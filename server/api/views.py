@@ -15,6 +15,14 @@ from django.views.decorators.csrf import csrf_exempt
 from base.models import ScannedPlant
 
 
+def plant_to_dictionary(plant):
+    return {
+        'name': plant.name.title(),
+        'description': 'Lorem ipsum',  # TODO: Description
+        'image_url': plant.image.url,
+    }
+
+
 @csrf_exempt
 def scan_view(request):
     if request.method.lower() != 'post':
@@ -61,8 +69,6 @@ def scan_view(request):
                       headers={'Content-Type': 'application/json'})
 
     if r.status_code != 200:
-        print('neki nije bilo vrejdi pa ne prepozna')
-
         res = {
             'success': False,
             'plant': None,
@@ -83,8 +89,6 @@ def scan_view(request):
         suggestions = check_identification(scanned_id, sleep=0.5)
 
     if len(suggestions) == 0:
-        print('timeoutov suggestion (upsi)')
-
         res = {
             'success': False,
             'plant': None,
@@ -92,23 +96,32 @@ def scan_view(request):
         }
     else:
         suggestion = suggestions[0]
+        print('recognized!')
+        print(suggestion)
 
         plant_name = suggestion['plant']['name'].lower()
 
         scanned.recognized = True
-        scanned.plant_name = plant_name
+        scanned.name = plant_name
         scanned.probability = suggestion['probability']
         scanned.save()
 
         res = {
             'success': True,
-            'plant': {
-                'name': plant_name.title(),
-                'description': 'Lorem ipsum',
-                'image_url': scanned.image.url,
-            },
+            'plant': plant_to_dictionary(scanned),
             'probability': scanned.probability,
         }
+
+    return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+def history_view(request):
+    plants_query = ScannedPlant.objects.filter(recognized=True, probability__gte=0.1).order_by('date_created')
+    plants = list(map(plant_to_dictionary, plants_query))
+
+    res = {
+        'plants': plants,
+    }
 
     return HttpResponse(json.dumps(res), content_type='application/json')
 

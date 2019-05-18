@@ -10,7 +10,7 @@ class ScannedPlant(models.Model):
 
     image = models.ImageField(null=True, blank=True)
 
-    plant_name = models.CharField(max_length=256, blank=True)
+    name = models.CharField(max_length=256, blank=True)
     probability = models.FloatField(null=True, blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True)

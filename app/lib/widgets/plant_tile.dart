@@ -15,31 +15,87 @@ class PlantTile extends StatelessWidget {
             onTap: () => Navigator.of(context)
                 .push(MaterialPageRoute(builder: (_) => PlantDetails(plant))),
             child: AspectRatio(
-                aspectRatio: 4 / 3,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: <Widget>[
-                      Image(
-                          image:
-                              CachedNetworkImageProvider(plant['image_url'])),
-                      Container(
-                        height: 64.0,
-                        color: Colors.green.withOpacity(0.5),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 8.0),
+                aspectRatio: 2 / 1,
+                child: Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 72.0),
+                      child: Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 78.0, top: 16.0, bottom: 16.0, right: 8.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Expanded(child: Text(plant['name']))
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Text(
+                                        plant['name'],
+                                        overflow: TextOverflow.clip,
+                                        style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w600),
+                                        softWrap: true,
+                                      ),
+                                    ),
+                                    Container(height: 12.0,),
+                                    Text(plant['description'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis,),
+                                    Expanded(child: Container(),),
+                                    Expanded(
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            plant['invasive'] ? Icons.error : Icons.error_outline,
+                                            color: plant['invasive'] ? Colors.red : Colors.grey,
+                                            size: 18.0,
+                                          ),
+                                          Container(width: 4.0,),
+                                          Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0),),
+                                          Expanded(child: Container(),),
+                                          Icon(
+                                            plant['protected'] ? Icons.check : Icons.clear,
+                                            color: plant['invasive'] ? Colors.red : Colors.grey,
+                                            size: 18.0,
+                                          ),
+                                          Container(width: 4.0,),
+                                          Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0),),
+                                          Container(width: 4.0,)
+                                          //protected, invasive
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 8.0),
+                        child: Container(
+                            height: 128.0,
+                            width: 128.0,
+                            decoration: new BoxDecoration(
+                                boxShadow: kElevationToShadow[5],
+                                shape: BoxShape.circle,
+                                image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image:
+                                        new NetworkImage(plant['image_url'])))),
+                      ),
+                    ),
+                  ],
                 ))));
   }
 }

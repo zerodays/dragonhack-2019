@@ -42,7 +42,7 @@ class HistoryPageState extends State<HistoryPage> {
               padding: EdgeInsets.all(16.0),
               itemBuilder: plantsBuilder,
               itemCount: plants.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, childAspectRatio: 3 / 4, crossAxisSpacing: 16.0, mainAxisSpacing: 16.0),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, childAspectRatio: 7 / 3, crossAxisSpacing: 16.0, mainAxisSpacing: 16.0),
             ),
     );
   }

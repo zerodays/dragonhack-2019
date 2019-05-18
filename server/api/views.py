@@ -47,6 +47,15 @@ def scan_view(request):
     scanned.save()
 
     image = Image.open(BytesIO(base64.b64decode(image_b64)))
+
+    width, height = image.size
+    size = min(width, height)
+    left = (width - size) / 2
+    top = (height - size) / 2
+    right = (width + size) / 2
+    bottom = (height + size) / 2
+    image = image.crop((left, top, right, bottom))
+
     image_file = BytesIO()
     image.save(fp=image_file, format='JPEG')
 

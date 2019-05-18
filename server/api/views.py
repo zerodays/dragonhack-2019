@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
-from base.models import ScannedPlant, Plant
+from base.models import ScannedPlant
 
 
 @csrf_exempt
@@ -92,28 +92,22 @@ def scan_view(request):
         }
     else:
         suggestion = suggestions[0]
-        print('nasu rozo')
-        print(suggestion)
 
         plant_name = suggestion['plant']['name'].lower()
-        plant = Plant.objects.filter(name=plant_name).first()
-        if plant is None:
-            plant = Plant(name=plant_name,
-                          description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-            plant.save()
 
         scanned.recognized = True
-        scanned.plant = plant
+        scanned.plant_name = plant_name
+        scanned.probability = suggestion['probability']
         scanned.save()
 
         res = {
             'success': True,
             'plant': {
-                'name': plant.name.title(),
-                'description': plant.description,
+                'name': plant_name.title(),
+                'description': 'Lorem ipsum',
                 'image_url': scanned.image.url,
             },
-            'probability': suggestion['probability'],
+            'probability': scanned.probability,
         }
 
     return HttpResponse(json.dumps(res), content_type='application/json')

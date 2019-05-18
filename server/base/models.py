@@ -14,3 +14,15 @@ class ScannedPlant(models.Model):
     probability = models.FloatField(null=True, blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
+
+
+class SpecialPlant(models.Model):
+    INVAZIVNE = 'IN'
+    ZASCITENE = 'ZA'
+    TYPE = (
+        (INVAZIVNE, 'invasive'),
+        (ZASCITENE, 'protected'),
+    )
+
+    name = models.CharField(max_length=256)
+    type = models.CharField(max_length=2, choices=TYPE)

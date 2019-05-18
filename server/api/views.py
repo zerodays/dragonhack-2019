@@ -20,6 +20,7 @@ def plant_to_dictionary(plant):
         'name': plant.name.title(),
         'description': 'Lorem ipsum',  # TODO: Description
         'image_url': plant.image.url,
+        'date_scanned': plant.date_created.strftime('%d. %b %Y %H:%M')
     }
 
 

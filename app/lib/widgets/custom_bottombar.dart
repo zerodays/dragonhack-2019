@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'custom_notched_rectangle.dart';
+import 'package:dragonhack_2019/util/custom_notched_rectangle.dart';
 import 'package:flutter/foundation.dart';
 
 class CustomBottomBar extends StatelessWidget {

@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:path/path.dart' show join;
+import 'package:path_provider/path_provider.dart';
 
+import 'api.dart';
 
 List<CameraDescription> allCameras;
-
 
 class CameraView extends StatefulWidget {
   @override
@@ -36,12 +38,37 @@ class CameraViewState extends State<CameraView> {
   @override
   Widget build(BuildContext context) {
     if (!controller.value.isInitialized) {
-      return Container();
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
-    return AspectRatio(
-        aspectRatio:
-        controller.value.aspectRatio,
-        child: CameraPreview(controller));
+    return Stack(
+        alignment: Alignment.center,
+        children: [
+      AspectRatio(
+        aspectRatio: controller.value.aspectRatio,
+        child: CameraPreview(controller),
+      ),
+      Padding(
+          padding: EdgeInsets.all(32.0),
+          child:
+      FloatingActionButton(
+        child: Icon(Icons.panorama_fish_eye),
+        onPressed: takePicture,
+      ))
+    ]);
   }
 
+
+  Future<void> takePicture() async {
+    String filename = join(
+        (await getTemporaryDirectory()).path,
+    '${DateTime.now()}.jpg',
+    );
+
+    await controller.takePicture(filename);
+
+    // TODO; neki dobis nazaj tuki
+    sendImage(filename);
+  }
 }

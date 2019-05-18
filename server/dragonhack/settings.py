@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -25,8 +24,9 @@ SECRET_KEY = 'k)4bkjk^5-jujv0j*5!-5i)c$rm0r!w^-lfe3m4gvhqrth*s*a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+PLANT_ID_API_KEY = 'yylPerd536RE0FxbxEFHdtxyiBemL0erMwFnLuqiuTR10gOKwT'
 
 # Application definition
 
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'base',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dragonhack.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -79,7 +80,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -99,7 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -111,8 +110,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

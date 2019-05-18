@@ -10,6 +10,62 @@ class PlantTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget invasiveAndProtected;
+
+    if (MediaQuery.of(context).size.width >= 390) {
+      invasiveAndProtected = Center(
+        child: Row(
+          children: <Widget>[
+            Icon(
+              plant['invasive'] ? Icons.error : Icons.error_outline,
+              color: plant['invasive'] ? Colors.red : Colors.grey,
+              size: 18.0,
+            ),
+            Container(width: 4.0,),
+            Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0),),
+            Expanded(child: Container(),),
+            Icon(
+              plant['protected'] ? Icons.check : Icons.clear,
+              color: plant['invasive'] ? Colors.green : Colors.grey,
+              size: 18.0,
+            ),
+            Container(width: 4.0,),
+            Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0),),
+            Container(width: 4.0,)
+            //protected, invasive
+          ],
+        ),
+      );
+    } else {
+      invasiveAndProtected = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Icon(
+                  plant['invasive'] ? Icons.error : Icons.error_outline,
+                  color: plant['invasive'] ? Colors.red : Colors.grey,
+                  size: 18.0,
+                ),
+                Container(width: 4.0,),
+                Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0),), //protected, invasive
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Icon(
+                  plant['protected'] ? Icons.check : Icons.clear,
+                  color: plant['invasive'] ? Colors.green : Colors.grey,
+                  size: 18.0,
+                ),
+                Container(width: 4.0,),
+                Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0),),
+              ],
+            )
+          ],
+      );
+    }
+
     return Material(
         child: InkWell(
             onTap: () => Navigator.of(context)
@@ -19,14 +75,14 @@ class PlantTile extends StatelessWidget {
                 child: Stack(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 72.0),
+                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6.0),
                       child: Card(
                         elevation: 3,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
                         child: Container(
                           padding: EdgeInsets.only(
-                              left: 78.0, top: 16.0, bottom: 16.0, right: 8.0),
+                              left: MediaQuery.of(context).size.width / 6.0 + 8.0, top: 16.0, bottom: 16.0, right: 8.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,30 +103,8 @@ class PlantTile extends StatelessWidget {
                                     ),
                                     Container(height: 12.0,),
                                     Text(plant['description'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis,),
-                                    Expanded(child: Container(),),
-                                    Expanded(
-                                      child: Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            plant['invasive'] ? Icons.error : Icons.error_outline,
-                                            color: plant['invasive'] ? Colors.red : Colors.grey,
-                                            size: 18.0,
-                                          ),
-                                          Container(width: 4.0,),
-                                          Text(plant['invasive'] ? 'Invasive' : 'Not invasive', style: TextStyle(fontSize: 13.0),),
-                                          Expanded(child: Container(),),
-                                          Icon(
-                                            plant['protected'] ? Icons.check : Icons.clear,
-                                            color: plant['invasive'] ? Colors.green : Colors.grey,
-                                            size: 18.0,
-                                          ),
-                                          Container(width: 4.0,),
-                                          Text(plant['protected'] ? 'Protected' : 'Not protected', style: TextStyle(fontSize: 13.0),),
-                                          Container(width: 4.0,)
-                                          //protected, invasive
-                                        ],
-                                      ),
-                                    )
+                                    Flexible(child: Container()),
+                                    invasiveAndProtected
                                   ],
                                 ),
                               )
@@ -84,15 +118,13 @@ class PlantTile extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.only(left: 8.0),
                         child: Container(
-                            height: 128.0,
-                            width: 128.0,
+                            height: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.of(context).size.width / 3,
                             decoration: new BoxDecoration(
-                                boxShadow: kElevationToShadow[5],
                                 shape: BoxShape.circle,
                                 image: new DecorationImage(
                                     fit: BoxFit.fill,
-                                    image:
-                                        new NetworkImage(plant['image_url'])))),
+                                    image: CachedNetworkImageProvider(plant['image_url'])))),
                       ),
                     ),
                   ],

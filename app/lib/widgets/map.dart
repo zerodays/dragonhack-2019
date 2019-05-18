@@ -3,6 +3,7 @@ import 'package:dragonhack_2019/teams.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'plant_details.dart';
 
 class MapWidget extends StatefulWidget {
   @override
@@ -60,7 +61,9 @@ class _MapWidgetState extends State<MapWidget> {
           height: 80.0,
           point: LatLng(plant['latitude'], 15.459820),
           builder: (BuildContext context) => GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => PlantDetails(plant)));
+              },
               child: Image.asset(
                 'assets/marker.png',
                 color: color,

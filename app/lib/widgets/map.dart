@@ -21,7 +21,7 @@ class _MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
-        center: LatLng(46.019269613810565, 14.392059200316794),
+        center: LatLng(46.232410, 15.459820),
       ),
       layers: [
         TileLayerOptions(
@@ -57,8 +57,8 @@ class _MapWidgetState extends State<MapWidget> {
         Marker(
             width: 80.0,
             height: 80.0,
-            point: LatLng(14.0, 56.0),
-            builder: (BuildContext context) => Container(color: Colors.green, child: Image.asset('assets/marker.png', height: 200.0, width: 200.0,))
+            point: LatLng(46.232410, 15.459820),
+            builder: (BuildContext context) => Container(color: Colors.green, child: Image.asset('assets/marker.png', height: 80.0, width: 80.0,))
         )).toList();
 
     print('got markers');

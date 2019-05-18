@@ -1,20 +1,21 @@
 import base64
+import json
 import time
 import uuid
 from io import BytesIO
 
+import requests
 from PIL import Image
 from django.conf import settings
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 
 from base.models import ScannedPlant, Plant
 
-import requests
-import json
 
-
+@csrf_exempt
 def scan_view(request):
     if request.method.lower() != 'post':
         return HttpResponseBadRequest('tole pa ni post decko')

@@ -1,5 +1,8 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+
+import 'widgets/plant_details.dart';
 
 typedef Future<Map<String, dynamic>> PlantRequest();
 
@@ -31,8 +34,7 @@ class ScannedPlantViewState extends State<ScannedPlantView> {
       await showDialog(
           context: context,
           barrierDismissible: true,
-          builder: (BuildContext context) =>
-              AlertDialog(
+          builder: (BuildContext context) => AlertDialog(
                 title: Text('Plant not recognized'),
                 content: Text(
                     'Sorry, but we were not able to recognize any plants.'),
@@ -58,33 +60,12 @@ class ScannedPlantViewState extends State<ScannedPlantView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-          children: <Widget>[
-            AspectRatio(
-                aspectRatio: 3 / 4,
-                child: Image.file(File(widget.imagePath))
-            ),
-            Expanded(child:
-            getPlantDescription())
-          ],
-        )
-    );
-  }
-
-  Widget getPlantDescription() {
-    if (plant == null) {
-      return Center(child: CircularProgressIndicator(),);
-    }
-
-    return Column(
-      children: <Widget>[
-        Text(
-          plant['name'],
-          style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-        ),
-        Text(plant['description'])
-      ],
-    );
+    return (plant == null)
+        ? Scaffold(
+            body: AspectRatio(
+                aspectRatio: 3 / 4, child: Image.file(File(widget.imagePath)))
+                // TODO some progress indicator
+    )
+        : PlantDetails(plant);
   }
 }

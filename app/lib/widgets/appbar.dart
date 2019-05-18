@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dragonhack_2019/history_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -56,7 +57,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   height: 56.0,
                   width: 56.0,
                   color: Colors.white,
-                  child: IconButton(icon: Icon(Icons.satellite), onPressed: () => {}),
+                  child: IconButton(icon: Icon(Icons.satellite), onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => HistoryPage()));
+                  }),
                 ),
               ),
             ],

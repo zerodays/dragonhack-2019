@@ -85,3 +85,8 @@ Future<Map<String, dynamic>> sendImage(String imageName) async {
 
   return data['plant'];
 }
+
+Future<List<Map<String, dynamic>>> getHistoryScans() async {
+  Map<String, dynamic> data = await getRequest('history', {});
+  return data['plants'].cast<Map<String, dynamic>>();
+}

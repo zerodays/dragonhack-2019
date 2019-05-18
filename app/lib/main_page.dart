@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'widgets/appbar.dart';
 import 'camera_view.dart';
 import 'widgets/map.dart';
+import 'widgets/custom_bottombar.dart';
 import 'widgets/custom_notched_rectangle.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -26,24 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: SafeArea(
-                child: BottomAppBar(
-                  shape: CustomCircularNotchedRectangle(context),
-                  notchMargin: 6.0,
-                  child: Container(
-                    height: 48.0,
-                    child: Row(
-                      children: <Widget>[
-                        _getPercentageDisplay(10.2, true),
-                        Expanded(
-                          child: Container(),
-                        ),
-                        _getPercentageDisplay(89.8, false)
-                      ],
-                    ),
-                  ),
-                )
-            ),
+            child: CustomBottomBar()
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -65,21 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
             child: CustomAppBar(),
           )
         ],
-      ),
-    );
-  }
-
-  _getPercentageDisplay(double percentage, bool blue) {
-    return Expanded(
-      child: Container(
-        height: 46.0,
-        color: Colors.transparent,
-        child: Center(
-          child: Text(
-            '$percentage %',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
-          ),
-        ),
       ),
     );
   }

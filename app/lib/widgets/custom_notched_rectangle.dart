@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CustomCircularNotchedRectangle extends NotchedShape {
@@ -85,5 +86,40 @@ class CustomCircularNotchedRectangle extends NotchedShape {
       ..lineTo(host.right, host.bottom)
       ..lineTo(host.left, host.bottom)
       ..close();
+  }
+}
+
+
+class CustomBottomAppBarClipper extends CustomClipper<Path> {
+  const CustomBottomAppBarClipper({
+    @required this.geometry,
+    @required this.shape,
+    @required this.notchMargin,
+  }) : assert(geometry != null),
+        assert(shape != null),
+        assert(notchMargin != null),
+        super(reclip: geometry);
+
+  final ValueListenable<ScaffoldGeometry> geometry;
+  final NotchedShape shape;
+  final double notchMargin;
+
+  @override
+  Path getClip(Size size) {
+    // button is the floating action button's bounding rectangle in the
+    // coordinate system whose origin is at the appBar's top left corner,
+    // or null if there is no floating action button.
+    final Rect button = geometry.value.floatingActionButtonArea?.translate(
+      0.0,
+      geometry.value.bottomNavigationBarTop * -1.0,
+    );
+    return shape.getOuterPath(Offset.zero & size, button?.inflate(notchMargin));
+  }
+
+  @override
+  bool shouldReclip(CustomBottomAppBarClipper oldClipper) {
+    return oldClipper.geometry != geometry
+        || oldClipper.shape != shape
+        || oldClipper.notchMargin != notchMargin;
   }
 }

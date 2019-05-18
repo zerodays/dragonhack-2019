@@ -24,7 +24,7 @@ class _MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
-        center: LatLng(46.232410, 15.459820),
+        center: LatLng(46.0499461, 14.467791),
       ),
       layers: [
         TileLayerOptions(
@@ -61,13 +61,13 @@ class _MapWidgetState extends State<MapWidget> {
       return Marker(
           width: 80.0,
           height: 80.0,
-          point: LatLng(plant['latitude'], 15.459820),
+          point: LatLng(plant['latitude'], plant['longitude']),
           builder: (BuildContext context) => GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (_) => PlantDetails(plant)));
               },
-              child: Image.asset(
-                'assets/marker.png',
+              child: Icon(
+                Icons.local_florist,
                 color: color,
               )));
     }).toList();

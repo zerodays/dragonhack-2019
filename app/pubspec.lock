@@ -116,7 +116,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: d8e73ca751fae4b6fc55f27162c363a3810d4919
+      resolved-ref: "6dcd7812d9906f020f0eab2bf1becc8933bea1c8"
       url: "git@github.com:vidklopcic/flutter_map.git"
     source: git
     version: "0.5.0+1"

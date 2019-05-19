@@ -16,6 +16,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> overlayOptions = [
+    'Markers',
+    'Influence',
+    'Grassfield',
+    'Visina Planika'
+    'VISINA 0-100',
+    'VISINA 200-300',
+    'VISINA 300-400',
+    'VISINA 400-500',
+    'VISINA 600-700',
+    'VISINA 700-800',
+    'VISINA 800-900',
+    'VISINA 900-1000',
+    'VISINA 1000-1500',
+    'VISINA 1500-2000',
+    'VISINA 2000-3000',
+  ];
+
+  int currentOverlayOption = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: MapWidget(),
+            child: MapWidget(currentOverlayOption),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -47,7 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Align(
             alignment: Alignment.topCenter,
-            child: CustomAppBar(),
+            child: CustomAppBar(overlayOptions: overlayOptions, callback: (int newOption) async {
+              setState(() {
+                currentOverlayOption = newOption;
+              });
+            }),
           )
         ],
       ),

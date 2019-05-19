@@ -1,20 +1,21 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:dragonhack_2019/history_page.dart';
-import '../util/colors.dart';
+import 'package:flutter/material.dart';
 
 import '../globals.dart';
+import '../util/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize; // default is 56.0
   final double height;
+  final List<String> overlayOptions;
+  final Function callback;
 
-  CustomAppBar({
-    Key key,
-    this.height = appBarHeight,
-  }) : preferredSize = Size.fromHeight(height);
+  CustomAppBar(
+      {Key key, this.height = appBarHeight, this.overlayOptions, this.callback})
+      : preferredSize = Size.fromHeight(height);
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +87,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         child: IconButton(
                             icon: Icon(Icons.layers),
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => HistoryPage()));
+                              List<Widget> options = [];
+
+                              for (int i = 0; i < overlayOptions.length; ++i) {
+                                options.add(ListTile(
+                                  onTap: () {
+                                    callback(i);
+                                    Navigator.of(context).pop();
+                                    },
+                                  title: Text(overlayOptions[i]),
+                                ));
+                              }
+
+                              showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      SimpleDialog(children: options));
                             }),
                       ),
                     ),

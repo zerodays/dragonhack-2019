@@ -23,10 +23,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = false;
+    bool dark = true;
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'DragonHack 2019',
       theme: dark
           ? ThemeData(
               primaryColor: AppColors.primary,

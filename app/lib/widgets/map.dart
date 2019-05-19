@@ -32,7 +32,7 @@ class _MapWidgetState extends State<MapWidget> {
       List names = [
         '',
         '',
-        'TRAVNIK',
+        'TRAVNIK-OLD',
         'VISINA-PLANIKA',
         'VISINA-0-100',
         'VISINA-200-300',
@@ -61,7 +61,7 @@ class _MapWidgetState extends State<MapWidget> {
           'layers': names[widget.overlayIndex],
           'styles': '',
           'srs': 'EPSG:4326',
-          'time': '2016-11-01/2017-05-18',
+          'time': '2018-11-01/2019-05-18',
           'width': '100',
           'height': '100',
           'format': 'image/png'
@@ -76,8 +76,20 @@ class _MapWidgetState extends State<MapWidget> {
       layers: [
         TileLayerOptions(
             overlayTileOptions: tileLayerOptions,
-            urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            subdomains: ['a', 'b', 'c']),
+            wms: true,
+            urlTemplate:
+            'http://ows.terrestris.de/${widget.overlayIndex >= 2 ? 'osm-gray' : 'osm'}/service?SERVICE={SERVICE}&VERSION={VERSION}&REQUEST={REQUEST}&layers={layers}&styles={styles}&srs={srs}&width={width}&height={height}&format={format}&bbox={bbox}',
+            additionalOptions: {
+              'SERVICE': 'WMS',
+              'VERSION': '1.1.1',
+              'REQUEST': 'GetMap',
+              'layers': 'OSM-WMS',
+              'styles': '',
+              'srs': 'EPSG:4326',
+              'width': '256',
+              'height': '256',
+              'format': 'image/png'
+            }),
         MarkerLayerOptions(markers: markers),
       ],
     );

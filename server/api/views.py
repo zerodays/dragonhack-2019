@@ -135,7 +135,7 @@ def percentage_view(request):
     total_number = plants.count()
 
     team_0_num = plants.filter(team=0).count()
-    team_0_perc = round(total_number / team_0_num * 100)
+    team_0_perc = round(team_0_num / total_number * 100)
     team_1_perc = 100 - team_0_perc
 
     return dictionary_to_response({

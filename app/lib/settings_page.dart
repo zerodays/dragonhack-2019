@@ -31,6 +31,7 @@ class SettingsPageState extends State<SettingsPage> {
                 this.selected = i;
               });
               widget.callback(i);
+              Navigator.of(context).pop();
             }
           },
           label: Text(widget.overlayOptions[i]),

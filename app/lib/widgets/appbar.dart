@@ -70,7 +70,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         width: 56.0,
                         color: Theme.of(context).accentColor,
                         child: IconButton(
-                            icon: Icon(Icons.history),
+                            icon: Icon(Icons.history, color: Colors.white),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (_) => HistoryPage()));
@@ -91,7 +91,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         width: 56.0,
                         color: Theme.of(context).accentColor,
                         child: IconButton(
-                            icon: Icon(Icons.settings),
+                            icon: Icon(Icons.settings, color: Colors.white),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (_) => SettingsPage(

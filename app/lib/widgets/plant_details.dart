@@ -76,17 +76,17 @@ class PlantDetails extends StatelessWidget {
                         ],
                       ),
                       Divider(height: 32.0,),
-                      Container(height: 16.0,),
-                      Center(child: Text('Average elevation over time', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),),),
-                      Center(
+                      Container(height: Theme.of(context).brightness == Brightness.dark ? 0.0 :16.0,),
+                      Theme.of(context).brightness == Brightness.dark ? Container() : Center(child: Text('Average elevation over time', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),),),
+                      Theme.of(context).brightness == Brightness.dark ? Container() : Center(
                         child: Container(
                           padding: EdgeInsets.only(bottom: 16.0, right: 16.0, left: 16.0, top: 8.0),
                           width: MediaQuery.of(context).size.width / 4 * 3,
-                          height: 200.0,
+                          height: Theme.of(context).brightness == Brightness.dark ? 0 :200.0,
                           child: ElevationChart.withSampleData(Theme.of(context).brightness == Brightness.dark),
                         ),
                       ),
-                      Divider(height: 32.0,),
+                      Theme.of(context).brightness == Brightness.dark ? Container() : Divider(height: 32.0,),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
                         child: Row(

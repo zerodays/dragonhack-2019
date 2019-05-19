@@ -21,16 +21,16 @@ class ElevationChart extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
+
     return new charts.TimeSeriesChart(seriesList,
         animate: animate,
         // Provide a tickProviderSpec which does NOT require that zero is
         // included.
         primaryMeasureAxis: new charts.NumericAxisSpec(
             tickProviderSpec:
-            new charts.BasicNumericTickProviderSpec(zeroBound: false)));
+                new charts.BasicNumericTickProviderSpec(zeroBound: false)));
   }
 
   /// Create one series with sample hard coded data.
@@ -62,7 +62,9 @@ class ElevationChart extends StatelessWidget {
     return [
       new charts.Series<MyRow, DateTime>(
         id: 'Elevation',
-        colorFn: (_, __) => dark ? charts.Color.fromHex(code: '#1EB980') : charts.MaterialPalette.teal.shadeDefault,
+        colorFn: (_, __) => dark
+            ? charts.Color.fromHex(code: '#1EB980')
+            : charts.MaterialPalette.teal.shadeDefault,
         domainFn: (MyRow row, _) => row.timeStamp,
         measureFn: (MyRow row, _) => row.headcount,
         data: data,
@@ -75,5 +77,6 @@ class ElevationChart extends StatelessWidget {
 class MyRow {
   final DateTime timeStamp;
   final int headcount;
+
   MyRow(this.timeStamp, this.headcount);
 }

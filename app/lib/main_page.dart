@@ -46,14 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
             height: MediaQuery.of(context).size.height,
             child: MapWidget(currentOverlayOption),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomBar()
-          ),
+          Align(alignment: Alignment.bottomCenter, child: CustomBottomBar()),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(bottom: appBarHeight/2),
+              padding: EdgeInsets.only(bottom: appBarHeight / 2),
               child: FloatingActionButton(
                 child: const Icon(Icons.camera, color: Colors.white),
                 onPressed: () {
@@ -67,11 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Align(
             alignment: Alignment.topCenter,
-            child: CustomAppBar(overlayOptions: overlayOptions, callback: (int newOption) async {
-              setState(() {
-                currentOverlayOption = newOption;
-              });
-            }),
+            child: CustomAppBar(
+                overlayOptions: overlayOptions,
+                callback: (int newOption) async {
+                  setState(() {
+                    currentOverlayOption = newOption;
+                  });
+                },
+                selected: currentOverlayOption),
           )
         ],
       ),

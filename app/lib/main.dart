@@ -18,13 +18,25 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+
+// @Matej ne me ubit, to je zato da lahko dark temo spreminjamo brez restartanja appa.
+MyAppState myAppState;
+
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
 
   @override
-  Widget build(BuildContext context) {
-    bool dark = true;
+  MyAppState createState() {
+    myAppState = MyAppState();
+    return myAppState;
+  }
+}
 
+class MyAppState extends State<MyApp> {
+  bool dark = true;
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DragonHack 2019',
       theme: dark

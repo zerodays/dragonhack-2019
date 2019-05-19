@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:dragonhack_2019/history_page.dart';
+import 'package:dragonhack_2019/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import '../globals.dart';
@@ -12,9 +13,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final List<String> overlayOptions;
   final Function callback;
+  final int selected;
 
   CustomAppBar(
-      {Key key, this.height = appBarHeight, this.overlayOptions, this.callback})
+      {Key key,
+      this.height = appBarHeight,
+      this.overlayOptions,
+      this.callback,
+      this.selected})
       : preferredSize = Size.fromHeight(height);
 
   @override
@@ -85,24 +91,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         width: 56.0,
                         color: Theme.of(context).accentColor,
                         child: IconButton(
-                            icon: Icon(Icons.layers),
+                            icon: Icon(Icons.settings),
                             onPressed: () {
-                              List<Widget> options = [];
-
-                              for (int i = 0; i < overlayOptions.length; ++i) {
-                                options.add(ListTile(
-                                  onTap: () {
-                                    callback(i);
-                                    Navigator.of(context).pop();
-                                    },
-                                  title: Text(overlayOptions[i]),
-                                ));
-                              }
-
-                              showDialog(
-                                  context: context,
-                                  builder: (context) =>
-                                      SimpleDialog(children: options));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => SettingsPage(
+                                      overlayOptions, callback, selected)));
                             }),
                       ),
                     ),

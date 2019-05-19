@@ -17,6 +17,7 @@ class MapWidget extends StatefulWidget {
 
 class _MapWidgetState extends State<MapWidget> {
   List<Marker> markers = [];
+  List<CircleMarker> circles = [];
 
   @override
   void initState() {
@@ -27,6 +28,15 @@ class _MapWidgetState extends State<MapWidget> {
   @override
   Widget build(BuildContext context) {
     TileLayerOptions tileLayerOptions;
+    LayerOptions markerOptions;
+
+    if (widget.overlayIndex == 0) {
+      markerOptions = MarkerLayerOptions(
+        markers: markers,
+      );
+    } else if (widget.overlayIndex == 1) {
+      markerOptions = CircleLayerOptions(circles: circles);
+    }
 
     if (widget.overlayIndex >= 2) {
       List names = [
@@ -46,8 +56,6 @@ class _MapWidgetState extends State<MapWidget> {
         'VISINA-1500-2000',
         'VISINA-2000-3000',
       ];
-
-
 
       tileLayerOptions = TileLayerOptions(
         opacity: 0.3,
@@ -78,7 +86,7 @@ class _MapWidgetState extends State<MapWidget> {
             overlayTileOptions: tileLayerOptions,
             wms: true,
             urlTemplate:
-            'http://ows.terrestris.de/${widget.overlayIndex >= 2 ? 'osm-gray' : 'osm'}/service?SERVICE={SERVICE}&VERSION={VERSION}&REQUEST={REQUEST}&layers={layers}&styles={styles}&srs={srs}&width={width}&height={height}&format={format}&bbox={bbox}',
+                'http://ows.terrestris.de/${widget.overlayIndex >= 2 ? 'osm-gray' : 'osm'}/service?SERVICE={SERVICE}&VERSION={VERSION}&REQUEST={REQUEST}&layers={layers}&styles={styles}&srs={srs}&width={width}&height={height}&format={format}&bbox={bbox}',
             additionalOptions: {
               'SERVICE': 'WMS',
               'VERSION': '1.1.1',
@@ -90,7 +98,7 @@ class _MapWidgetState extends State<MapWidget> {
               'height': '256',
               'format': 'image/png'
             }),
-        MarkerLayerOptions(markers: markers),
+        markerOptions ?? MarkerLayerOptions()
       ],
     );
   }
@@ -117,6 +125,22 @@ class _MapWidgetState extends State<MapWidget> {
 
     setState(() {
       markers = newMarkers;
+    });
+
+    List<CircleMarker> newCircles = plants.map((Map<String, dynamic> plant) {
+      Color color = teamToColor(intToTeam(plant['team']));
+
+      return CircleMarker(
+          point: LatLng(plant['latitude'], plant['longitude']),
+          useRadiusInMeter: true,
+          color: color.withOpacity(0.1),
+          borderColor: Colors.red,
+          borderStrokeWidth: 10.0,
+          radius: 2000.0);
+    }).toList();
+
+    setState(() {
+      circles = newCircles;
     });
   }
 }

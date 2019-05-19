@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'chart.dart';
 
 class PlantDetails extends StatelessWidget {
   final Map<String, dynamic> plant;
@@ -75,6 +76,17 @@ class PlantDetails extends StatelessWidget {
                         ],
                       ),
                       Divider(height: 32.0,),
+                      Container(height: 16.0,),
+                      Center(child: Text('Average elevation over time', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),),),
+                      Center(
+                        child: Container(
+                          padding: EdgeInsets.only(bottom: 16.0, right: 16.0, left: 16.0, top: 8.0),
+                          width: MediaQuery.of(context).size.width / 4 * 3,
+                          height: 200.0,
+                          child: ElevationChart.withSampleData(Theme.of(context).brightness == Brightness.dark),
+                        ),
+                      ),
+                      Divider(height: 32.0,),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
                         child: Row(
@@ -94,7 +106,7 @@ class PlantDetails extends StatelessWidget {
                             )
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

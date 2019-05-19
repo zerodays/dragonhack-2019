@@ -23,8 +23,8 @@ class Command(BaseCommand):
             print('Generating {}'.format(i))
 
             team = randint(0, 1)
-            longitude = uniform(14.2, 15.0)
-            latitude = uniform(45.7, 46.4)
+            longitude = uniform(13.6, 16.5)
+            latitude = uniform(45.3, 46.9)
 
             names = (
                 'taraxacum officinale', 'primula vulgaris', 'allium ursinum', 'convallaria majalis', 'bellis perennis',

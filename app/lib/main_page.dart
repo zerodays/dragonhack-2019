@@ -19,21 +19,21 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> overlayOptions = [
     'Markers',
     'Grassfield',
-    'Visina Planika',
-    'VISINA 0-100',
-    'VISINA 200-300',
-    'VISINA 300-400',
-    'VISINA 400-500',
-    'VISINA 600-700',
-    'VISINA 700-800',
-    'VISINA 800-900',
-    'VISINA 900-1000',
-    'VISINA 1000-1500',
-    'VISINA 1500-2000',
-    'VISINA 2000-3000',
+    'Height Edelweiss',
+    'Height 0 - 100 m',
+    'Height 200 - 300 m',
+    'Height 300 - 400 m',
+    'Height 400 - 500 m',
+    'Height 600 - 700 m',
+    'Height 700 - 800 m',
+    'Height 800 - 900 m',
+    'Height 900 - 1000 m',
+    'Height 1000 - 1500 m',
+    'Height 1500 - 2000 m',
+    'Height 2000 - 3000 m',
   ];
 
-  int currentOverlayOption = 1;
+  int currentOverlayOption = 0;
 
   @override
   Widget build(BuildContext context) {

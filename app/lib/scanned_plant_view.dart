@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/plant_details.dart';
@@ -62,10 +61,18 @@ class ScannedPlantViewState extends State<ScannedPlantView> {
   Widget build(BuildContext context) {
     return (plant == null)
         ? Scaffold(
-            body: AspectRatio(
-                aspectRatio: 3 / 4, child: Image.file(File(widget.imagePath)))
-                // TODO some progress indicator
-    )
+            body:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+                height: 250.0,
+                child: FlareActor(
+                  'assets/animation.flr',
+                  alignment: Alignment.center,
+                  fit: BoxFit.fitWidth,
+                  animation: 'animation',
+                )),
+                  Text('Recognizing...', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22.0),)
+          ]))
         : PlantDetails(plant);
   }
 }

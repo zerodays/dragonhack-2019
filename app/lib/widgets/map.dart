@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:dragonhack_2019/api.dart';
 import 'package:dragonhack_2019/teams.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,6 @@ class MapWidget extends StatefulWidget {
 
 class _MapWidgetState extends State<MapWidget> {
   List<Marker> markers = [];
-  List<CircleMarker> circles = [];
 
   @override
   void initState() {
@@ -35,13 +33,10 @@ class _MapWidgetState extends State<MapWidget> {
       markerOptions = MarkerLayerOptions(
         markers: markers,
       );
-    } else if (widget.overlayIndex == 1) {
-      markerOptions = CircleLayerOptions(circles: circles);
     }
 
-    if (widget.overlayIndex >= 2) {
+    if (widget.overlayIndex >= 1) {
       List names = [
-        '',
         '',
         'TRAVNIK-OLD',
         'VISINA-PLANIKA',
@@ -80,7 +75,7 @@ class _MapWidgetState extends State<MapWidget> {
 
     return FlutterMap(
       options: MapOptions(
-        center: LatLng(46.0496339,14.4703818),
+        center: LatLng(46.0496339, 14.4703818),
       ),
       layers: [
         TileLayerOptions(
@@ -126,24 +121,6 @@ class _MapWidgetState extends State<MapWidget> {
 
     setState(() {
       markers = newMarkers;
-    });
-
-    Random random = Random();
-
-    List<CircleMarker> newCircles = plants.map((Map<String, dynamic> plant) {
-      Color color = teamToColor(intToTeam(plant['team']));
-
-      return CircleMarker(
-          point: LatLng(plant['latitude'], plant['longitude']),
-          useRadiusInMeter: true,
-          color: color.withOpacity(1),
-          borderColor: Colors.red,
-          borderStrokeWidth: 10.0,
-          radius: 500.0 + random.nextInt(5000));
-    }).toList();
-
-    setState(() {
-      circles = newCircles;
     });
   }
 }

@@ -18,7 +18,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<String> overlayOptions = [
     'Markers',
-    'Influence',
     'Grassfield',
     'Visina Planika',
     'VISINA 0-100',

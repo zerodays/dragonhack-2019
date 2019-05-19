@@ -19,7 +19,6 @@ final Dio _dio = new Dio(BaseOptions(
 
 Future getRequest(String name, Map<String, dynamic> params,
     {bool addTeam = false}) async {
-
   Response response = await _dio.get(name, queryParameters: params);
 
   if (response.statusCode != 200) {
@@ -53,14 +52,14 @@ Future postRequest(String name, Map data) async {
   return json.decode(responseStr);
 }
 
-
 Future<Map<String, dynamic>> sendImage(String imageName) async {
   LocationData location;
 
   try {
     location = await Location().getLocation();
   } on PlatformException {
-    location = LocationData.fromMap({'latitude': 46.0503344, 'longtitude': 14.4672468});
+    location = LocationData.fromMap(
+        {'latitude': 46.0503344, 'longtitude': 14.4672468});
   }
 
   String imageBase64 = base64.encode(await File(imageName).readAsBytes());
@@ -90,4 +89,8 @@ Future<Map<String, dynamic>> sendImage(String imageName) async {
 Future<List<Map<String, dynamic>>> getHistoryScans() async {
   Map<String, dynamic> data = await getRequest('history', {});
   return data['plants'].cast<Map<String, dynamic>>();
+}
+
+Future<Map<String, dynamic>> getPercentage() async {
+  return await getRequest('percentage', {});
 }

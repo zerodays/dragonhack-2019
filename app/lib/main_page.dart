@@ -20,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'Markers',
     'Influence',
     'Grassfield',
-    'Visina Planika'
+    'Visina Planika',
     'VISINA 0-100',
     'VISINA 200-300',
     'VISINA 300-400',

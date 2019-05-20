@@ -39,6 +39,7 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DragonHack 2019',
+      debugShowCheckedModeBanner: false,
       theme: dark
           ? ThemeData(
               primaryColor: AppColors.primary,
